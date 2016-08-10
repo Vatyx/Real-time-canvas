@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 paths = [];
 
 app.use(express.static('public'));
+app.set("port", process.env.PORT || 3000);
 
 app.get("/", function(req, res){
 	req.render("index.html");
@@ -21,6 +22,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3000, function() {
-	console.log("Listening on port 3000");
+http.listen(app.get("port"), function() {
+	console.log("Listening on port " + app.get("port"));
 });
